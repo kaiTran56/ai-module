@@ -4,6 +4,7 @@ import java.awt.*;
 
 public class RobotControl extends Robot implements Runnable {
     private volatile boolean isStopped = false;
+
     public RobotControl() throws AWTException {
     }
 
@@ -26,6 +27,7 @@ public class RobotControl extends Robot implements Runnable {
             System.out.println("Thread interrupted and stopped.");
         }
     }
+
     public void stopThread() {
         isStopped = true;
     }

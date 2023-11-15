@@ -38,7 +38,7 @@ public class KeyboardAction {
             }
         }catch(Exception ex){
             ex.printStackTrace();
-            System.out.println(dto);
+           System.out.println(dto);
         }
     }
     public void pressed(KeyboardActionDto dto, Robot robot){

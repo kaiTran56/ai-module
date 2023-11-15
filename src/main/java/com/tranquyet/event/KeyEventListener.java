@@ -9,6 +9,7 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
@@ -27,6 +28,8 @@ public class KeyEventListener implements NativeKeyListener {
         KeyboardActionType keyboardActionType = KeyboardActionType.PRESSED;
         String value = getKeyText(e.getKeyCode());
         KeyValue keyValue = KeyValue.fromContent(value);
+        if (keyValue == null)
+            return;
         KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
         System.out.println(keyboardActionDto);
         ACTION_CENTER.add(keyboardActionDto);
@@ -35,10 +38,12 @@ public class KeyEventListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyReleased(final NativeKeyEvent e) {
-//        System.out.println("nativeKeyReleased: "+(int)e.getKeyChar() +", "+e.paramString());
+//       System.out.println("nativeKeyReleased: "+(int)e.getKeyChar() +", "+e.paramString());
         KeyboardActionType keyboardActionType = KeyboardActionType.RELEASED;
         String value = getKeyText(e.getKeyCode());
         KeyValue keyValue = KeyValue.fromContent(value);
+        if (keyValue == null)
+            return;
         KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
         System.out.println(keyboardActionDto);
         ACTION_CENTER.add(keyboardActionDto);
@@ -46,7 +51,7 @@ public class KeyEventListener implements NativeKeyListener {
             System.out.println("TURN OFF");
             System.exit(1);
         }
-        if(getKeyText(e.getKeyCode()).equals("A")){
+        if (getKeyText(e.getKeyCode()).equals("A")) {
             robot.stopThread();
         }
         if (getKeyText(e.getKeyCode()).equals("R")) {
@@ -57,9 +62,9 @@ public class KeyEventListener implements NativeKeyListener {
         }
     }
 
-    private KeyboardActionDto initialize(KeyboardActionType keyboardActionType, KeyValue keyValue){
+    private KeyboardActionDto initialize(KeyboardActionType keyboardActionType, KeyValue keyValue) {
         Long time = System.nanoTime();
-        String desc = keyboardActionType.getAction() + ": " ;
+        String desc = keyboardActionType.getAction() + ": ";
         KeyboardActionDto keyboardActionDto = KeyboardActionDto.builder()
                 .action(keyboardActionType.getAction())
                 .keyboardActionType(keyboardActionType)
@@ -74,7 +79,7 @@ public class KeyEventListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyTyped(final NativeKeyEvent e) {
-        System.out.println("Typed: "+e.getKeyChar() +", "+e.paramString());
+        System.out.println("Typed: " + e.getKeyChar() + ", " + e.paramString());
     }
 
     public void startKeyboard() throws InterruptedException {

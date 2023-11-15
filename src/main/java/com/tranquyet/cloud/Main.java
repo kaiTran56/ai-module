@@ -14,21 +14,23 @@ public class Main {
         try {
             // Create an instance of the Robot class
             Robot robot = new Robot();
-            Thread.sleep(1000);
-            // Press and release the Meta (Windows) key
-            robot.keyPress(KeyEvent.VK_WINDOWS);
-            Thread.sleep(1000);
-            robot.keyRelease(KeyEvent.VK_WINDOWS);
+            robot.mouseMove(1120, 497);
+//            Thread.sleep(1000);
+//            // Press and release the Meta (Windows) key
+//            robot.keyPress(KeyEvent.VK_WINDOWS);
+//            Thread.sleep(1000);
+//            robot.keyRelease(KeyEvent.VK_WINDOWS);
 
             // Add a delay to allow time for the key press to be recognized
             robot.delay(1000);
-
+//            robot.mouseMove(1424, 32);
             // You can also perform other actions after pressing the Meta key if needed
 
         } catch (AWTException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
+//        catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }

@@ -44,13 +44,13 @@ public class MouseAction {
             throw new RuntimeException(e);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(dto);
+           System.out.println(dto);
             throw new RuntimeException(e);
         }
     }
 
     public void moved(MouseActionDto dto, Robot robot) {
-        robot.mouseMove(Math.toIntExact(dto.getX()), Math.toIntExact(dto.getY()));
+        robot.mouseMove((dto.getX()), Math.toIntExact(dto.getY()));
     }
 
     public void leftClicked(MouseActionDto dto, Robot robot) {

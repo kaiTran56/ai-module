@@ -29,6 +29,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
     public void nativeMouseClicked(NativeMouseEvent e) {
         mLatch.countDown();
     }
+
     public static RobotControl robot = null;
 
     public void removeMouseEvent(GlobalMouseListener example) {
@@ -42,6 +43,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
             throw new RuntimeException(e);
         }
     }
+
     private void disableLog() {
         // Get the logger for "com.github.kwhat.jnativehook" and set the level to warning.
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
@@ -49,15 +51,16 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
         // Don't forget to disable the parent handlers.
         logger.setUseParentHandlers(false);
     }
-    private MouseActionDto initializeMouseAction(NativeMouseEvent e, MouseActionType mouseActionType){
+
+    private MouseActionDto initializeMouseAction(NativeMouseEvent e, MouseActionType mouseActionType) {
         Long time = System.nanoTime();
         MouseActionDto action = MouseActionDto.builder()
                 .mouseActionType(mouseActionType)
                 .value(mouseActionType.getValue())
                 .tag(mouseActionType.getTag())
                 .action(mouseActionType.getAction())
-                .x((long) e.getX())
-                .y((long) e.getY())
+                .x(e.getX())
+                .y(e.getY())
                 .build();
         action.setId(time);
         action.setStatus(Constants.ACTIVE_MOUSE_ACTION);
@@ -98,6 +101,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
     /**
      * press left click at first and hang up to the end of action => left release
      * same with right click
+     *
      * @param e
      */
     public void nativeMouseDragged(NativeMouseEvent e) {
@@ -125,6 +129,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
         mLatch.await();
         System.out.println("All Mouse, exiting.");
     }
+
     public static void main(String[] args) {
         try {
             example.disableLog();

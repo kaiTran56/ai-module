@@ -11,9 +11,9 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Builder
 public class MouseActionDto extends BasedDto{
-    private Long x;
-    private Long y;
-    private Long wheel;
+    private int x;
+    private int y;
+    private int wheel;
     private String action;
     private Long value;
     private String tag;
