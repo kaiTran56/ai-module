@@ -14,4 +14,6 @@ public class KeyboardActionDto extends BasedDto{
     private String key;
     private String description;
     private KeyboardActionType keyboardActionType;
+    private String action;
+    private KeyValue keyValue;
 }

@@ -1,11 +1,16 @@
 package com.tranquyet.event;
 
+import com.tranquyet.Constants;
 import com.tranquyet.action.RobotActionCenter;
+import com.tranquyet.dto.KeyValue;
+import com.tranquyet.dto.KeyboardActionDto;
+import com.tranquyet.enums.KeyboardActionType;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 import java.awt.event.ActionEvent;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 
 import static com.tranquyet.event.GlobalMouseListener.*;
@@ -19,26 +24,30 @@ public class KeyEventListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyPressed(final NativeKeyEvent e) {
-//        System.out.println("CHECK: "+((e.getModifiers() & ActionEvent.CTRL_MASK) ==ActionEvent.CTRL_MASK));
-//        System.out.println("nativeKeyPressed: "+getKeyText(e.getKeyCode()));
-//        System.out.println("Pressed: " + getKeyText(e.getKeyCodre()));
-
-        System.out.println("Pressed: " + e.getModifiers());
-
+        KeyboardActionType keyboardActionType = KeyboardActionType.PRESSED;
+        String value = getKeyText(e.getKeyCode());
+        KeyValue keyValue = KeyValue.fromContent(value);
+        KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
+        System.out.println(keyboardActionDto);
+        ACTION_CENTER.add(keyboardActionDto);
         mLatch.countDown();
     }
 
     @Override
     public void nativeKeyReleased(final NativeKeyEvent e) {
 //        System.out.println("nativeKeyReleased: "+(int)e.getKeyChar() +", "+e.paramString());
-        Thread myThread = null;
+        KeyboardActionType keyboardActionType = KeyboardActionType.RELEASED;
+        String value = getKeyText(e.getKeyCode());
+        KeyValue keyValue = KeyValue.fromContent(value);
+        KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
+        System.out.println(keyboardActionDto);
+        ACTION_CENTER.add(keyboardActionDto);
         if (getKeyText(e.getKeyCode()).equals("Q")) {
             System.out.println("TURN OFF");
             System.exit(1);
         }
         if(getKeyText(e.getKeyCode()).equals("A")){
             robot.stopThread();
-            myThread.interrupt();
         }
         if (getKeyText(e.getKeyCode()).equals("R")) {
             System.out.println(ACTION_CENTER.size());
@@ -46,6 +55,21 @@ public class KeyEventListener implements NativeKeyListener {
             System.out.println("DEMO MOVE MOUSE");
             new RobotActionCenter().robotActionFactory(ACTION_CENTER);
         }
+    }
+
+    private KeyboardActionDto initialize(KeyboardActionType keyboardActionType, KeyValue keyValue){
+        Long time = System.nanoTime();
+        String desc = keyboardActionType.getAction() + ": " ;
+        KeyboardActionDto keyboardActionDto = KeyboardActionDto.builder()
+                .action(keyboardActionType.getAction())
+                .keyboardActionType(keyboardActionType)
+                .keyValue(keyValue)
+                .key(keyValue.getContent())
+                .description(desc)
+                .build();
+        keyboardActionDto.setId(time);
+        keyboardActionDto.setStatus(Constants.ACTIVE_KEY_ACTION);
+        return keyboardActionDto;
     }
 
     @Override

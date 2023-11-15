@@ -28,7 +28,7 @@ public class KeyboardAction {
     public static KeyboardAction getInstance(){
         return key != null ?  key : new KeyboardAction();
     }
-    private void keyboardActionFactory(KeyboardActionDto dto, Robot robot){
+    protected void keyboardActionFactory(KeyboardActionDto dto, Robot robot){
         try{
             Thread.sleep(10);
             switch (dto.getKeyboardActionType()){
@@ -37,14 +37,14 @@ public class KeyboardAction {
                 default -> throw new Exception("check again");
             }
         }catch(Exception ex){
+            ex.printStackTrace();
             System.out.println(dto);
         }
     }
     public void pressed(KeyboardActionDto dto, Robot robot){
-        KeyStroke keyStroke = KeyStroke.getKeyStroke(dto.getKey());
-        robot.keyPress(keyStroke.getKeyCode());
+        robot.keyPress(dto.getKeyValue().getKeyEvent());
     }
     public void released(KeyboardActionDto dto, Robot robot){
-//        robot.mouseRelease();
+        robot.keyRelease(dto.getKeyValue().getKeyEvent());
     }
 }
