@@ -8,16 +8,16 @@ import java.util.Arrays;
 
 @Getter
 public enum KeyValue {
-    LEFT_CONTROL(KeyEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Left Control"),
-    CONTROL(KeyEvent.CTRL_MASK, NativeKeyEvent.CTRL_MASK, "Control"),
-    LEFT_ALT(KeyEvent.ALT_MASK, NativeKeyEvent.ALT_L_MASK, "Left Alt"),
-    LEFT_META(KeyEvent.VK_WINDOWS, NativeKeyEvent.META_L_MASK, "Left Meta"),
-    RIGHT_META(KeyEvent.VK_WINDOWS, NativeKeyEvent.META_R_MASK, "Right Meta"),
+//    LEFT_CONTROL(KeyEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Left Control"),
+//    CONTROL(KeyEvent.CTRL_MASK, NativeKeyEvent.CTRL_MASK, "Control"),
+//    LEFT_ALT(KeyEvent.ALT_MASK, NativeKeyEvent.ALT_L_MASK, "Left Alt"),
+//    LEFT_META(KeyEvent.VK_WINDOWS, NativeKeyEvent.META_L_MASK, "Left Meta"),
+//    RIGHT_META(KeyEvent.VK_WINDOWS, NativeKeyEvent.META_R_MASK, "Right Meta"),
 
     //    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Right Control"),
 //    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Right Alt"),
 //    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Slash"),
-//    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Right Shift"),
+//    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Right Shift"),2
 //    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Left Shift"),
 //    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Caps Lock"),
 //    LEFT_CONTROL(ActionEvent.CTRL_MASK, NativeKeyEvent.CTRL_L_MASK, "Caps Lock"),

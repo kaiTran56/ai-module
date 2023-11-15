@@ -75,15 +75,15 @@ public class MouseAction {
 
     public void wheeled(MouseActionDto dto, Robot robot) {
         moved(dto, robot);
-        robot.mouseWheel(Math.toIntExact(dto.getWheel()));
+        robot.mouseWheel(dto.getWheel());
     }
 
     public void dragged(MouseActionDto dto, Robot robot) {
         switch (dto.getMouseActionType()) {
-            case RIGHT_DRAGGED_CLICK -> rightClicked(dto, robot);
-            case RIGHT_DRAGGED_RELEASE -> rightReleased(dto, robot);
-            case LEFT_DRAGGED_CLICK -> leftClicked(dto, robot);
-            case LEFT_DRAGGED_RELEASE -> leftReleased(dto, robot);
+            case RIGHT_DRAGGED_CLICK -> moved(dto, robot);
+            case RIGHT_DRAGGED_RELEASE -> moved(dto, robot);
+            case LEFT_DRAGGED_CLICK -> moved(dto, robot);
+            case LEFT_DRAGGED_RELEASE -> moved(dto, robot);
         }
     }
 }

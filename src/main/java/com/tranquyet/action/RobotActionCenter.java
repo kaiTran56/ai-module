@@ -13,7 +13,7 @@ public class RobotActionCenter implements RobotAction {
             if (p instanceof MouseActionDto dto) {
                 MouseAction.getInstance().mousesActionFactory(dto, robot);
             } else if (p instanceof KeyboardActionDto key){
-//                KeyboardAction.getInstance().keyboardActionFactory(key, robot);
+                KeyboardAction.getInstance().keyboardActionFactory(key, robot);
             }
         });
     }

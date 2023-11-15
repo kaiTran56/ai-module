@@ -30,7 +30,7 @@ public class KeyboardAction {
     }
     protected void keyboardActionFactory(KeyboardActionDto dto, Robot robot){
         try{
-            Thread.sleep(10);
+            Thread.sleep(50);
             switch (dto.getKeyboardActionType()){
                 case PRESSED ->pressed(dto, robot);
                 case RELEASED -> released(dto, robot);

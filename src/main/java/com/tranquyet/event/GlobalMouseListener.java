@@ -32,16 +32,15 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
 
     public static RobotControl robot = null;
 
+    public void initRobot() throws AWTException {
+        robot = new RobotControl();
+    }
+
     public void removeMouseEvent(GlobalMouseListener example) {
-        try {
-            robot = new RobotControl();
-            System.out.println("removeEvent");
-            GlobalScreen.removeNativeMouseWheelListener(example);
-            GlobalScreen.removeNativeMouseListener(example);
-            GlobalScreen.removeNativeMouseMotionListener(example);
-        } catch (AWTException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("removeEvent");
+        GlobalScreen.removeNativeMouseWheelListener(example);
+        GlobalScreen.removeNativeMouseListener(example);
+        GlobalScreen.removeNativeMouseMotionListener(example);
     }
 
     private void disableLog() {
@@ -52,7 +51,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
         logger.setUseParentHandlers(false);
     }
 
-    private MouseActionDto initializeMouseAction(NativeMouseEvent e, MouseActionType mouseActionType) {
+    private MouseActionDto initializeMouseAction(NativeMouseEvent e, MouseActionType mouseActionType, NativeMouseWheelEvent ... ew) {
         Long time = System.nanoTime();
         MouseActionDto action = MouseActionDto.builder()
                 .mouseActionType(mouseActionType)
@@ -62,6 +61,8 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
                 .x(e.getX())
                 .y(e.getY())
                 .build();
+        if(mouseActionType.equals(MouseActionType.WHEEL))
+            action.setWheel(ew[0].getWheelRotation());
         action.setId(time);
         action.setStatus(Constants.ACTIVE_MOUSE_ACTION);
         return action;
@@ -119,7 +120,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
     @Override
     public void nativeMouseWheelMoved(NativeMouseWheelEvent e) {
         MouseActionType mouseActionType = MouseActionType.WHEEL;
-        MouseActionDto action = initializeMouseAction(e, mouseActionType);
+        MouseActionDto action = initializeMouseAction(e, mouseActionType, e);
         System.out.println("nativeMouseWheelMoved: " + action);
         ACTION_CENTER.add(action);
     }
@@ -144,7 +145,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
             System.out.println("Listener attached.");
             harness.startKeyboard();
             System.out.println("Listener detached.");
-            removeNativeKeyListener(harness);
+
 
 //            example.removeMouseEvent(example);
 

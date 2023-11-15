@@ -6,6 +6,7 @@ import com.tranquyet.dto.KeyValue;
 import com.tranquyet.dto.KeyboardActionDto;
 import com.tranquyet.enums.KeyboardActionType;
 import org.jnativehook.GlobalScreen;
+import org.jnativehook.NativeHookException;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
@@ -17,6 +18,7 @@ import java.util.concurrent.CountDownLatch;
 import static com.tranquyet.event.GlobalMouseListener.*;
 import static java.util.logging.Level.OFF;
 import static java.util.logging.Logger.getLogger;
+import static org.jnativehook.GlobalScreen.removeNativeKeyListener;
 import static org.jnativehook.keyboard.NativeKeyEvent.getKeyText;
 
 public class KeyEventListener implements NativeKeyListener {
@@ -47,19 +49,7 @@ public class KeyEventListener implements NativeKeyListener {
         KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
         System.out.println(keyboardActionDto);
         ACTION_CENTER.add(keyboardActionDto);
-        if (getKeyText(e.getKeyCode()).equals("Q")) {
-            System.out.println("TURN OFF");
-            System.exit(1);
-        }
-        if (getKeyText(e.getKeyCode()).equals("A")) {
-            robot.stopThread();
-        }
-        if (getKeyText(e.getKeyCode()).equals("R")) {
-            System.out.println(ACTION_CENTER.size());
-            new GlobalMouseListener().removeMouseEvent(example);
-            System.out.println("DEMO MOVE MOUSE");
-            new RobotActionCenter().robotActionFactory(ACTION_CENTER);
-        }
+
     }
 
     private KeyboardActionDto initialize(KeyboardActionType keyboardActionType, KeyValue keyValue) {
@@ -80,6 +70,29 @@ public class KeyEventListener implements NativeKeyListener {
     @Override
     public void nativeKeyTyped(final NativeKeyEvent e) {
         System.out.println("Typed: " + e.getKeyChar() + ", " + e.paramString());
+        if ( e.getKeyChar()==('1')) {
+            System.out.println("TURN OFF");
+            System.exit(1);
+        }
+        if (getKeyText(e.getKeyCode()).equals("A")) {
+            robot.stopThread();
+        }
+        if (e.getKeyChar()==('2')) {
+            System.out.println(ACTION_CENTER.size());
+            try {
+                new GlobalMouseListener().initRobot();
+                GlobalScreen.unregisterNativeHook();
+
+            } catch (AWTException ex) {
+                throw new RuntimeException(ex);
+            } catch (NativeHookException ex) {
+                throw new RuntimeException(ex);
+            }
+//            new GlobalMouseListener().removeMouseEvent(example);
+//            removeNativeKeyListener(harness);
+            System.out.println("DEMO MOVE MOUSE");
+            new RobotActionCenter().robotActionFactory(ACTION_CENTER);
+        }
     }
 
     public void startKeyboard() throws InterruptedException {
