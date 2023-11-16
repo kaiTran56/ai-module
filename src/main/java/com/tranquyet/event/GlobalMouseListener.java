@@ -43,7 +43,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
         GlobalScreen.removeNativeMouseMotionListener(example);
     }
 
-    private void disableLog() {
+    public void disableLog() {
         // Get the logger for "com.github.kwhat.jnativehook" and set the level to warning.
         Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
         logger.setLevel(Level.WARNING);
@@ -125,7 +125,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
         ACTION_CENTER.add(action);
     }
 
-    private void start() throws InterruptedException {
+    public void start() throws InterruptedException {
         System.out.println("Awaiting Mouse events.");
         mLatch.await();
         System.out.println("All Mouse, exiting.");

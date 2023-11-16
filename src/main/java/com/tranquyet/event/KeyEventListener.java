@@ -70,29 +70,29 @@ public class KeyEventListener implements NativeKeyListener {
     @Override
     public void nativeKeyTyped(final NativeKeyEvent e) {
         System.out.println("Typed: " + e.getKeyChar() + ", " + e.paramString());
-        if ( e.getKeyChar()==('1')) {
-            System.out.println("TURN OFF");
-            System.exit(1);
-        }
-        if (getKeyText(e.getKeyCode()).equals("A")) {
-            robot.stopThread();
-        }
-        if (e.getKeyChar()==('2')) {
-            System.out.println(ACTION_CENTER.size());
-            try {
-                new GlobalMouseListener().initRobot();
-                GlobalScreen.unregisterNativeHook();
-
-            } catch (AWTException ex) {
-                throw new RuntimeException(ex);
-            } catch (NativeHookException ex) {
-                throw new RuntimeException(ex);
-            }
-//            new GlobalMouseListener().removeMouseEvent(example);
-//            removeNativeKeyListener(harness);
-            System.out.println("DEMO MOVE MOUSE");
-            new RobotActionCenter().robotActionFactory(ACTION_CENTER);
-        }
+//        if ( e.getKeyChar()==('1')) {
+//            System.out.println("TURN OFF");
+//            System.exit(1);
+//        }
+//        if (e.getKeyChar()==('2')) {
+//            System.out.println(ACTION_CENTER.size());
+//            try {
+//                new GlobalMouseListener().initRobot();
+//                GlobalScreen.unregisterNativeHook();
+//                new RobotActionCenter().robotActionFactory(ACTION_CENTER);
+//            } catch (AWTException | NativeHookException ex) {
+//                throw new RuntimeException(ex);
+//            }
+////            new GlobalMouseListener().removeMouseEvent(example);
+////            removeNativeKeyListener(harness);
+//            System.out.println("DEMO MOVE MOUSE");
+//        }
+        KeyboardActionType keyboardActionType = KeyboardActionType.TYPED;
+        KeyValue keyValue = KeyValue.fromContent(String.valueOf(e.getKeyChar()));
+        if (keyValue == null)
+            return;
+        KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
+        ACTION_CENTER.add(keyboardActionDto);
     }
 
     public void startKeyboard() throws InterruptedException {

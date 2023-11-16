@@ -34,6 +34,10 @@ public class KeyboardAction {
             switch (dto.getKeyboardActionType()){
                 case PRESSED ->pressed(dto, robot);
                 case RELEASED -> released(dto, robot);
+                case TYPED -> {
+                    pressed(dto, robot);
+                    released(dto, robot);
+                }
                 default -> throw new Exception("check again");
             }
         }catch(Exception ex){
