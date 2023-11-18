@@ -62,6 +62,7 @@ public class ActionMapper {
                 .value(action.getValue())
                 .tag(action.getTag())
                 .action(action.getAction())
+                .wheel(action.getWheel())
                 .x(action.getX())
                 .y(action.getY())
                 .build();

@@ -43,8 +43,6 @@ public class RobotActionCenter implements RobotAction {
                     KeyboardAction.getInstance().keyboardActionFactory(key, robot);
                 }
                 else if (p instanceof DelayTimeDto dto) {
-                    System.out.println("[DTO]: "+dto);
-                    System.out.println("[DELAY]: "+dto.getDelay());
                     Long milis = dto.getDelay() * 1000;
                     Thread.sleep(Math.toIntExact(milis));
                 }
