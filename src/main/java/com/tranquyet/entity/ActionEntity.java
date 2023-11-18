@@ -1,9 +1,6 @@
 package com.tranquyet.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,9 +12,8 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class ActionEntity {
     @Id
-    @Column(name = "id", columnDefinition = "REAL")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "x", columnDefinition = "INTEGER")
     private int x;
     @Column(name = "y", columnDefinition = "INTEGER")
@@ -38,5 +34,6 @@ public class ActionEntity {
     private Long delay;
     @Column(name = "action_type", columnDefinition = "TEXT")
     private String actionType;
-    
+    @Column(name = "created_date", columnDefinition = "REAL")
+    private Long createdDate;
 }

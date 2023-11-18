@@ -63,7 +63,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
                 .build();
         if(mouseActionType.equals(MouseActionType.WHEEL))
             action.setWheel(ew[0].getWheelRotation());
-        action.setId(time);
+        action.setCreatedDate(time);
         action.setStatus(Constants.ACTIVE_MOUSE_ACTION);
         return action;
     }

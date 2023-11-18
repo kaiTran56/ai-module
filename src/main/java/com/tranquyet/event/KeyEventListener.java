@@ -56,7 +56,7 @@ public class KeyEventListener implements NativeKeyListener {
                 .key(keyValue.getContent())
                 .description(desc)
                 .build();
-        keyboardActionDto.setId(time);
+        keyboardActionDto.setCreatedDate(time);
         keyboardActionDto.setStatus(Constants.ACTIVE_KEY_ACTION);
         keyboardActionDto.setActionType(Constants.KEYBOARD_ACTION);
         return keyboardActionDto;

@@ -59,6 +59,7 @@ public class ExecutedActionController {
     @GetMapping("/stopRecord")
     public ResponseEntity<String> stopRecord() {
         try {
+            actionService.truncate();
             GlobalScreen.unregisterNativeHook();
             robotActionCenter.recordActions(ACTION_CENTER);
         } catch (NativeHookException e) {

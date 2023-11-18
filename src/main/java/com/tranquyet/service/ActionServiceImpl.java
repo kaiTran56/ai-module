@@ -37,7 +37,7 @@ public class ActionServiceImpl implements ActionService{
 
     @Override
     public void truncate() {
-        log.info("");
+        log.info("[delete data]");
         actionRepository.deleteAll();
     }
 }

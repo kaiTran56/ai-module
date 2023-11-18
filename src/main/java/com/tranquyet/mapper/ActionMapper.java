@@ -22,6 +22,7 @@ public class ActionMapper {
             actionEntity.setAction(dto.getAction());
             actionEntity.setValue(dto.getValue());
             actionEntity.setTag(dto.getTag());
+            actionEntity.setCreatedDate(dto.getCreatedDate());
             actionEntity.setActionType(Constants.MOUSE_ACTION);
             return actionEntity;
         }else if (action instanceof KeyboardActionDto dto){
@@ -29,11 +30,13 @@ public class ActionMapper {
             actionEntity.setKey(dto.getKey());
             actionEntity.setDescription(dto.getDescription());
             actionEntity.setAction(dto.getAction());
+            actionEntity.setCreatedDate(dto.getCreatedDate());
             actionEntity.setActionType(Constants.KEYBOARD_ACTION);
             return actionEntity;
         }else if (action instanceof DelayTimeDto dto){
             actionEntity.setId(dto.getId());
             actionEntity.setDelay(dto.getDelay());
+            actionEntity.setCreatedDate(dto.getCreatedDate());
             actionEntity.setActionType(Constants.DELAY_ACTION);
             return actionEntity;
         }
@@ -63,6 +66,7 @@ public class ActionMapper {
                 .y(action.getY())
                 .build();
         dto.setId(action.getId());
+        dto.setCreatedDate(action.getCreatedDate());
         dto.setStatus(Constants.ACTIVE_MOUSE_ACTION);
         dto.setActionType(Constants.MOUSE_ACTION);
         return dto;
@@ -76,6 +80,7 @@ public class ActionMapper {
                 .description(action.getDescription())
                 .build();
         keyboardActionDto.setId(action.getId());
+        keyboardActionDto.setCreatedDate(action.getCreatedDate());
         keyboardActionDto.setStatus(Constants.ACTIVE_KEY_ACTION);
         return keyboardActionDto;
     }
@@ -83,6 +88,7 @@ public class ActionMapper {
         DelayTimeDto dto = new DelayTimeDto();
         dto.setId(action.getId());
         dto.setDelay(action.getDelay());
+        dto.setCreatedDate(action.getCreatedDate());
         return dto;
     }
 }

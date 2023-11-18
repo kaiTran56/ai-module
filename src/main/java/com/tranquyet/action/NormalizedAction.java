@@ -19,15 +19,15 @@ public class NormalizedAction {
             int nxt = idx + 1;
             Object beforeObj = actions.get(before);
             Object nxtObj = actions.get(nxt);
-            Long firstTime = beforeObj instanceof MouseActionDto ? ((MouseActionDto) beforeObj).getId() : ((KeyboardActionDto) beforeObj).getId();
-            Long nxtTime = nxtObj instanceof MouseActionDto ? ((MouseActionDto) nxtObj).getId() : ((KeyboardActionDto) nxtObj).getId();
+            Long firstTime = beforeObj instanceof MouseActionDto ? ((MouseActionDto) beforeObj).getCreatedDate() : ((KeyboardActionDto) beforeObj).getCreatedDate();
+            Long nxtTime = nxtObj instanceof MouseActionDto ? ((MouseActionDto) nxtObj).getCreatedDate() : ((KeyboardActionDto) nxtObj).getCreatedDate();
 
             int minus = Math.round((float) (nxtTime - firstTime) / Constants.NANO_TIME);
             customizedActions.add(beforeObj);
             if (minus >= 1){
-                Long id = System.nanoTime();
+                Long time = System.nanoTime();
                 DelayTimeDto dto = new DelayTimeDto();
-                dto.setId(id);
+                dto.setCreatedDate(time);
                 dto.setDelay((long) minus);
                 dto.setActionType(Constants.DELAY_ACTION);
                 customizedActions.add(dto);
