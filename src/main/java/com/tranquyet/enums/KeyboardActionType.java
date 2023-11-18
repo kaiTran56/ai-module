@@ -3,6 +3,8 @@ package com.tranquyet.enums;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.Arrays;
+
 @Getter
 @ToString
 public enum KeyboardActionType {
@@ -10,5 +12,9 @@ public enum KeyboardActionType {
     private String action;
     KeyboardActionType(String action){
         this.action = action;
+    }
+    public static KeyboardActionType fromAction(String action){
+        KeyboardActionType actionType = Arrays.stream(values()).filter(p->p.getAction().equals(action)).findFirst().orElse(null);
+        return actionType;
     }
 }

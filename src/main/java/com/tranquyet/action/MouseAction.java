@@ -26,7 +26,9 @@ public class MouseAction {
 
     protected void mousesActionFactory(MouseActionDto dto, Robot robot) {
         try {
+
             Thread.sleep(10);
+
             switch (dto.getMouseActionType()) {
                 case MOVED -> moved(dto, robot);
                 case LEFT_CLICK -> leftClicked(dto, robot);
@@ -44,7 +46,7 @@ public class MouseAction {
             throw new RuntimeException(e);
         } catch (Exception e) {
             e.printStackTrace();
-           System.out.println(dto);
+            System.out.println(dto);
             throw new RuntimeException(e);
         }
     }

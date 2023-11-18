@@ -1,15 +1,14 @@
 package com.tranquyet.dto;
 
 import com.tranquyet.enums.MouseActionType;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString(callSuper = true)
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MouseActionDto extends BasedDto{
     private int x;
     private int y;

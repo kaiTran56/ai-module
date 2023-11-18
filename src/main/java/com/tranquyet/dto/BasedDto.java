@@ -7,4 +7,6 @@ import lombok.Data;
 public abstract class BasedDto {
     private Long id;
     private Long status;
+    private String actionType;
+    private Long createdDate;
 }

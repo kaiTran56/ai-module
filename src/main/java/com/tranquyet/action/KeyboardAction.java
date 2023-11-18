@@ -14,10 +14,12 @@ import java.awt.event.KeyEvent;
 @Setter
 public class KeyboardAction {
     private static KeyboardAction key;
-    private KeyboardAction(){
+
+    private KeyboardAction() {
 
     }
-    public KeyStroke keyStrokeCenter(final String key){
+
+    public KeyStroke keyStrokeCenter(final String key) {
 //        int value = switch (key){
 //            case -> 0
 //            default -> throw new IllegalStateException("Unexpected value: " + key);
@@ -25,14 +27,17 @@ public class KeyboardAction {
 //        return KeyStroke.getKeyStroke;
         return null;
     }
-    public static KeyboardAction getInstance(){
-        return key != null ?  key : new KeyboardAction();
+
+    public static KeyboardAction getInstance() {
+        return key != null ? key : new KeyboardAction();
     }
-    protected void keyboardActionFactory(KeyboardActionDto dto, Robot robot){
-        try{
+
+    protected void keyboardActionFactory(KeyboardActionDto dto, Robot robot) {
+        try {
             Thread.sleep(50);
-            switch (dto.getKeyboardActionType()){
-                case PRESSED ->pressed(dto, robot);
+
+            switch (dto.getKeyboardActionType()) {
+                case PRESSED -> pressed(dto, robot);
                 case RELEASED -> released(dto, robot);
                 case TYPED -> {
                     pressed(dto, robot);
@@ -40,15 +45,17 @@ public class KeyboardAction {
                 }
                 default -> throw new Exception("check again");
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-           System.out.println(dto);
+            System.out.println(dto);
         }
     }
-    public void pressed(KeyboardActionDto dto, Robot robot){
+
+    public void pressed(KeyboardActionDto dto, Robot robot) {
         robot.keyPress(dto.getKeyValue().getKeyEvent());
     }
-    public void released(KeyboardActionDto dto, Robot robot){
+
+    public void released(KeyboardActionDto dto, Robot robot) {
         robot.keyRelease(dto.getKeyValue().getKeyEvent());
     }
 }

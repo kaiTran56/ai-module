@@ -35,10 +35,9 @@ public enum MouseActionType {
                 && p.getTag().equals(tag)).findFirst().orElse(null);
         return type;
     }
-    public static MouseActionType fromActionTag(String action, String tag){
-        MouseActionType type =  Arrays.stream(values()).filter(p->p.getValue()!=null)
-                .filter(p->p.getAction().equals(action)
-                        && p.getTag().equals(tag)).findFirst().orElse(null);
+    public static MouseActionType fromTag(String tag){
+        MouseActionType type =  Arrays.stream(values())
+                .filter(p->p.getTag().equals(tag)).findFirst().orElse(null);
         return type;
     }
 }
