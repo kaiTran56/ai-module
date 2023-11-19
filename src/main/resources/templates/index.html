@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet"/>
     <link th:href="@{/css/styles.css}" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -135,7 +136,7 @@
 
 
                             <div class="card bg-primary text-white mb-4">
-                                <button type="submit">Register</button>
+                                <button class="btn-info" type="submit">Register</button>
                             </div>
 
                         </form>
@@ -143,25 +144,23 @@
                     <div class="col-xl-3 col-md-6">
                         <form action="#" th:action="@{/index/stopRecord}" method="get">
                             <div class="card bg-warning text-white mb-4">
-                                <button type="submit">StopRecord</button>
+                                <button class="btn-danger" type="submit">StopRecord</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-xl-3 col-md-6">
                         <form th:action="@{/index/start}" method="get">
                             <div class="card bg-warning text-white mb-4">
-                                <button type="submit">Start</button>
+                                <button class="btn-success" type="submit">Start</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card bg-danger text-white mb-4">
-                            <div class="card-body">Danger Card</div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small text-white stretched-link" th:href="@{/index/end}">Endj</a>
-                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <form th:action="@{/index/end}" method="get">
+                            <div class="card bg-warning text-white mb-4">
+                                <button class="btn-primary" type="submit">End</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="row">
@@ -253,5 +252,7 @@
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
         crossorigin="anonymous"></script>
 <script th:src="@{/js/datatables-simple-demo.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </body>
 </html>

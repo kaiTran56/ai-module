@@ -43,6 +43,7 @@ public enum KeyValue {
     LEFT_ARROW(KeyEvent.VK_LEFT, NativeKeyEvent.VC_LEFT, "<"),
     RIGHT_ARROW(KeyEvent.VK_RIGHT, NativeKeyEvent.VC_RIGHT, ">"),
     DOT(KeyEvent.VK_PERIOD, NativeKeyEvent.VC_PERIOD, "."),
+    BACKSPACE(KeyEvent.VK_BACK_SPACE, NativeKeyEvent.VC_BACKSPACE, "8-Back"),
 
     F1(KeyEvent.VK_F1, NativeKeyEvent.VC_F1, "F1"),
     F2(KeyEvent.VK_F2, NativeKeyEvent.VC_F2, "F2"),

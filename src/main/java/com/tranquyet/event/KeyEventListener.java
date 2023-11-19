@@ -65,8 +65,9 @@ public class KeyEventListener implements NativeKeyListener {
     @Override
     public void nativeKeyTyped(final NativeKeyEvent e) {
         System.out.println("Typed: " + e.getKeyChar() + ", " + e.paramString());
+        String custom = e.getRawCode()==8 ? KeyValue.BACKSPACE.getContent() : String.valueOf(e.getKeyChar());
         KeyboardActionType keyboardActionType = KeyboardActionType.TYPED;
-        KeyValue keyValue = KeyValue.fromContent(String.valueOf(e.getKeyChar()));
+        KeyValue keyValue = KeyValue.fromContent(custom);
         if (keyValue == null)
             return;
         KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
