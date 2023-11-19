@@ -22,7 +22,7 @@ public class ActionServiceImpl implements ActionService{
     private ActionMapper actionMapper;
     @Override
     public boolean insertActions(List<Object> actions) {
-        if(actions!=null||actions.isEmpty())
+        if(actions==null||actions.isEmpty())
             throw new RuntimeException("[insertActions]: no actions");
         List<ActionEntity> actEntities = actions.stream().map(p->actionMapper.toEntity(p)).toList();
         actionRepository.saveAll(actEntities);
