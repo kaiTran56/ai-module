@@ -1,7 +1,7 @@
 package com.tranquyet.controller;
 
 import com.tranquyet.action.RobotActionCenter;
-import com.tranquyet.event.GlobalMouseListener;
+import com.tranquyet.event.MouseEventListener;
 import com.tranquyet.event.RobotControl;
 import com.tranquyet.service.ActionService;
 import org.jnativehook.GlobalScreen;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.awt.*;
 import java.util.List;
 
-import static com.tranquyet.event.GlobalMouseListener.*;
+import static com.tranquyet.event.MouseEventListener.*;
 
 @RestController
 @RequestMapping("/api/robot")
@@ -43,7 +43,7 @@ public class ExecutedActionController {
                 GlobalScreen.addNativeKeyListener(harness);
                 GlobalScreen.addNativeMouseListener(example);
                 GlobalScreen.addNativeMouseMotionListener(example);
-                GlobalScreen.addNativeMouseWheelListener(new GlobalMouseListener());
+                GlobalScreen.addNativeMouseWheelListener(new MouseEventListener());
                 example.start();
                 System.out.println("Listener attached.");
                 harness.startKeyboard();
@@ -59,6 +59,8 @@ public class ExecutedActionController {
     @GetMapping("/stopRecord")
     public ResponseEntity<String> stopRecord() {
         try {
+            if(ACTION_CENTER==null||ACTION_CENTER.isEmpty())
+                throw new RuntimeException("[insertActions]: no actions");
             actionService.truncate();
             GlobalScreen.unregisterNativeHook();
             robotActionCenter.recordActions(ACTION_CENTER);

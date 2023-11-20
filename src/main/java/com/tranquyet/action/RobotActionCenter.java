@@ -4,7 +4,6 @@ import com.tranquyet.dto.DelayTimeDto;
 import com.tranquyet.dto.KeyboardActionDto;
 import com.tranquyet.dto.MouseActionDto;
 import com.tranquyet.service.ActionService;
-import org.jnativehook.GlobalScreen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tranquyet.event.GlobalMouseListener.robot;
+import static com.tranquyet.event.MouseEventListener.robot;
 @Service
 public class RobotActionCenter implements RobotAction {
     @Autowired

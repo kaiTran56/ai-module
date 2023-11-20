@@ -10,7 +10,7 @@ import org.jnativehook.keyboard.NativeKeyListener;
 
 import java.util.concurrent.CountDownLatch;
 
-import static com.tranquyet.event.GlobalMouseListener.*;
+import static com.tranquyet.event.MouseEventListener.*;
 import static java.util.logging.Level.OFF;
 import static java.util.logging.Logger.getLogger;
 import static org.jnativehook.keyboard.NativeKeyEvent.getKeyText;

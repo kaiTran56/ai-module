@@ -1,14 +1,13 @@
 package com.tranquyet.controller;
 
 import com.tranquyet.action.RobotActionCenter;
-import com.tranquyet.event.GlobalMouseListener;
+import com.tranquyet.event.MouseEventListener;
 import com.tranquyet.event.RobotControl;
 import com.tranquyet.service.ActionService;
+import lombok.extern.slf4j.Slf4j;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import java.awt.*;
 import java.util.List;
 
-import static com.tranquyet.event.GlobalMouseListener.*;
-import static com.tranquyet.event.GlobalMouseListener.ACTION_CENTER;
+import static com.tranquyet.event.MouseEventListener.*;
+import static com.tranquyet.event.MouseEventListener.ACTION_CENTER;
 
 @Controller
 @RequestMapping("/index")
+@Slf4j
 public class IndexController {
     static {
         System.setProperty("java.awt.headless", "false");
@@ -43,7 +43,7 @@ public class IndexController {
                 GlobalScreen.addNativeKeyListener(harness);
                 GlobalScreen.addNativeMouseListener(example);
                 GlobalScreen.addNativeMouseMotionListener(example);
-                GlobalScreen.addNativeMouseWheelListener(new GlobalMouseListener());
+                GlobalScreen.addNativeMouseWheelListener(new MouseEventListener());
                 example.start();
                 System.out.println("Listener attached.");
                 harness.startKeyboard();
@@ -58,6 +58,10 @@ public class IndexController {
     public ModelAndView stopRecord() {
         ModelAndView modelAndView = new ModelAndView("index");
         try {
+            if(ACTION_CENTER==null||ACTION_CENTER.isEmpty()){
+                log.error("[insertActions]: no actions");
+                return modelAndView;
+            }
             actionService.truncate();
             GlobalScreen.unregisterNativeHook();
             robotActionCenter.recordActions(ACTION_CENTER);

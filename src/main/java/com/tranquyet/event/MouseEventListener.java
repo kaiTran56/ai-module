@@ -17,11 +17,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.jnativehook.GlobalScreen.removeNativeKeyListener;
-
-public class GlobalMouseListener implements NativeMouseInputListener, NativeMouseWheelListener {
+public class MouseEventListener implements NativeMouseInputListener, NativeMouseWheelListener {
     private final CountDownLatch mLatch = new CountDownLatch(100);
-    public static GlobalMouseListener example = new GlobalMouseListener();
+    public static MouseEventListener example = new MouseEventListener();
     public static KeyEventListener harness = new KeyEventListener();
 
     public static List<Object> ACTION_CENTER = new ArrayList<>();
@@ -36,7 +34,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
         robot = new RobotControl();
     }
 
-    public void removeMouseEvent(GlobalMouseListener example) {
+    public void removeMouseEvent(MouseEventListener example) {
         System.out.println("removeEvent");
         GlobalScreen.removeNativeMouseWheelListener(example);
         GlobalScreen.removeNativeMouseListener(example);
@@ -140,7 +138,7 @@ public class GlobalMouseListener implements NativeMouseInputListener, NativeMous
             GlobalScreen.addNativeKeyListener(harness);
             GlobalScreen.addNativeMouseListener(example);
             GlobalScreen.addNativeMouseMotionListener(example);
-            GlobalScreen.addNativeMouseWheelListener(new GlobalMouseListener());
+            GlobalScreen.addNativeMouseWheelListener(new MouseEventListener());
             example.start();
             System.out.println("Listener attached.");
             harness.startKeyboard();
