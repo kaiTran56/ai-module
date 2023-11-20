@@ -27,6 +27,7 @@ public class ActionServiceImpl implements ActionService{
         List<ActionEntity> actEntities = actions.stream().map(p->actionMapper.toEntity(p)).toList();
         actionRepository.saveAll(actEntities);
         log.info("[SAVE]: successfully!");
+
         return true;
     }
 

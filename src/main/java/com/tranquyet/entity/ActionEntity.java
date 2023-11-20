@@ -10,10 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class ActionEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ActionEntity extends BasedEntity{
+
     @Column(name = "x", columnDefinition = "INTEGER")
     private int x;
     @Column(name = "y", columnDefinition = "INTEGER")

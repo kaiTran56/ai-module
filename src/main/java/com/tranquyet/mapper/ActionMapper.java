@@ -24,6 +24,7 @@ public class ActionMapper {
             actionEntity.setTag(dto.getTag());
             actionEntity.setCreatedDate(dto.getCreatedDate());
             actionEntity.setActionType(Constants.MOUSE_ACTION);
+            actionEntity.setStatus(dto.getStatus());
             return actionEntity;
         }else if (action instanceof KeyboardActionDto dto){
             actionEntity.setId(dto.getId());
@@ -32,12 +33,14 @@ public class ActionMapper {
             actionEntity.setAction(dto.getAction());
             actionEntity.setCreatedDate(dto.getCreatedDate());
             actionEntity.setActionType(Constants.KEYBOARD_ACTION);
+            actionEntity.setStatus(dto.getStatus());
             return actionEntity;
         }else if (action instanceof DelayTimeDto dto){
             actionEntity.setId(dto.getId());
             actionEntity.setDelay(dto.getDelay());
             actionEntity.setCreatedDate(dto.getCreatedDate());
             actionEntity.setActionType(Constants.DELAY_ACTION);
+            actionEntity.setStatus(dto.getStatus());
             return actionEntity;
         }
         return actionEntity;
