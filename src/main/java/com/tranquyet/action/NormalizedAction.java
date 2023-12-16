@@ -21,7 +21,7 @@ public class NormalizedAction {
             Object nxtObj = actions.get(nxt);
             Long firstTime = beforeObj instanceof MouseActionDto ? ((MouseActionDto) beforeObj).getCreatedDate() : ((KeyboardActionDto) beforeObj).getCreatedDate();
             Long nxtTime = nxtObj instanceof MouseActionDto ? ((MouseActionDto) nxtObj).getCreatedDate() : ((KeyboardActionDto) nxtObj).getCreatedDate();
-
+            //TODO: send api to AI module
             int minus = Math.round((float) (nxtTime - firstTime) / Constants.NANO_TIME);
             customizedActions.add(beforeObj);
             if (minus >= 1){

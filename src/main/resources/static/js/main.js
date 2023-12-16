@@ -1,3 +1,15 @@
+$(()=>{
+    comment = new loadComments();
+    /*
+     * Register callbacks for starting and stopping the SSE controller.
+     */
+    window.onload = function() {
+        comment.start();
+    };
+    window.onbeforeunload = function() {
+        comment.stop();
+    }
+});
 function loadComments () {
 
     this.source = null;
@@ -6,9 +18,9 @@ function loadComments () {
 
         var commentTable = document.getElementById("comments");
 
-        this.source = new EventSource("/tool/comment/stream");
+        this.source = new EventSource(URL_COMMENT_WEBFLUX);
 
-        this.source.addEventListener("message", function (event) {
+        this.source.addEventListener("message",  (event)=> {
 
             // These events are JSON, so parsing and DOM fiddling are needed
             var comment = JSON.parse(event.data);
@@ -39,16 +51,4 @@ function loadComments () {
         this.source.close();
     }
 
-}
-
-comment = new loadComments();
-
-/*
- * Register callbacks for starting and stopping the SSE controller.
- */
-window.onload = function() {
-    comment.start();
-};
-window.onbeforeunload = function() {
-    comment.stop();
 }

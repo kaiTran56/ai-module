@@ -1,6 +1,7 @@
 package com.tranquyet.repository;
 
 import com.tranquyet.dto.Comment;
+import com.tranquyet.dto.LogActionDTO;
 import com.tranquyet.utils.CommentGenerator;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
