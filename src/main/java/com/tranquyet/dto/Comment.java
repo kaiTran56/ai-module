@@ -1,5 +1,10 @@
 package com.tranquyet.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Comment {
 
     private String author;
@@ -11,31 +16,6 @@ public class Comment {
         this.message = message;
         this.timestamp = timestamp;
     }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
     @Override
     public String toString() {
         return "Comment{" +

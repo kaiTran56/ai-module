@@ -1,6 +1,7 @@
 package com.tranquyet.controller;
 
 import com.tranquyet.action.RobotActionCenter;
+import com.tranquyet.event.KeyEventListener;
 import com.tranquyet.event.MouseEventListener;
 import com.tranquyet.event.RobotControl;
 import com.tranquyet.service.ActionService;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Set;
 
 import static com.tranquyet.event.MouseEventListener.*;
 import static com.tranquyet.event.MouseEventListener.ACTION_CENTER;
@@ -30,12 +32,18 @@ public class IndexController {
     private RobotActionCenter robotActionCenter;
     @Autowired
     private ActionService actionService;
+
+    KeyEventListener harness = new KeyEventListener();
+    MouseEventListener example = new MouseEventListener();
+
     @GetMapping("/record")
     public ModelAndView recordActions() {
         ModelAndView modelAndView = new ModelAndView("index");
-        new Thread(()->{
+        Thread thread = new Thread(()->{
             try {
+
                 ACTION_CENTER.clear();
+//                GlobalScreen.unregisterNativeHook();
                 GlobalScreen.registerNativeHook();
                 // Construct the example object.
                 // Add the appropriate listeners.
@@ -51,13 +59,22 @@ public class IndexController {
             } catch (NativeHookException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
-        }).start();
+        });
+        thread.setName("start-record");
+        thread.start();
         return modelAndView;
     }
     @GetMapping("/stopRecord")
     public ModelAndView stopRecord() {
         ModelAndView modelAndView = new ModelAndView("index");
         try {
+            if(GlobalScreen.isNativeHookRegistered()){
+                GlobalScreen.removeNativeKeyListener(harness);
+                GlobalScreen.removeNativeMouseListener(example);
+                GlobalScreen.removeNativeMouseMotionListener(example);
+                GlobalScreen.removeNativeMouseWheelListener(new MouseEventListener());
+                GlobalScreen.unregisterNativeHook();
+            }
             if(ACTION_CENTER==null||ACTION_CENTER.isEmpty()){
                 log.error("[insertActions]: no actions");
                 return modelAndView;
@@ -78,7 +95,6 @@ public class IndexController {
             System.out.println(ACTION_CENTER.size());
             try {
                 Robot robot = new RobotControl();
-//                GlobalScreen.unregisterNativeHook();
                 new RobotActionCenter().robotActionFactory(actions, robot);
             } catch (AWTException ex) {
                 throw new RuntimeException(ex);

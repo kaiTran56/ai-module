@@ -27,7 +27,7 @@ public class KeyEventListener implements NativeKeyListener {
         if (keyValue == null)
             return;
         KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
-        System.out.println(keyboardActionDto);
+        System.out.println("nativeKeyPressed|"+keyboardActionDto);
         ACTION_CENTER.add(keyboardActionDto);
         mLatch.countDown();
     }
@@ -41,7 +41,7 @@ public class KeyEventListener implements NativeKeyListener {
         if (keyValue == null)
             return;
         KeyboardActionDto keyboardActionDto = initialize(keyboardActionType, keyValue);
-        System.out.println(keyboardActionDto);
+        System.out.println("nativeKeyReleased|"+keyboardActionDto);
         ACTION_CENTER.add(keyboardActionDto);
 
     }
@@ -64,7 +64,7 @@ public class KeyEventListener implements NativeKeyListener {
 
     @Override
     public void nativeKeyTyped(final NativeKeyEvent e) {
-        System.out.println("Typed: " + e.getKeyChar() + ", " + e.paramString());
+        System.out.println("typed|" + e.getKeyChar() + "|" + e.paramString());
         String custom = e.getRawCode()!=8 ?  String.valueOf(e.getKeyChar()) : KeyValue.BACKSPACE.getContent();
         KeyboardActionType keyboardActionType = KeyboardActionType.TYPED;
         KeyValue keyValue = KeyValue.fromContent(custom);

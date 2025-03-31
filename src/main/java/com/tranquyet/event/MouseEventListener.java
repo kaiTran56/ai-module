@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 
 public class MouseEventListener implements NativeMouseInputListener, NativeMouseWheelListener {
     private final CountDownLatch mLatch = new CountDownLatch(100);
-    public static MouseEventListener example = new MouseEventListener();
-    public static KeyEventListener harness = new KeyEventListener();
+//    public static MouseEventListener example = new MouseEventListener();
+//    public static KeyEventListener harness = new KeyEventListener();
 
     public static List<Object> ACTION_CENTER = new ArrayList<>();
 
@@ -73,7 +73,7 @@ public class MouseEventListener implements NativeMouseInputListener, NativeMouse
                 : MouseActionType.RIGHT_CLICK.getTag();
         MouseActionType mouseActionType = MouseActionType.fromValue(value, tag);
         MouseActionDto action = initializeMouseAction(e, mouseActionType);
-        System.out.println("nativeMousePressed: " + action);
+        System.out.println("nativeMousePressed|" + action);
         ACTION_CENTER.add(action);
         mLatch.countDown();
     }
@@ -85,14 +85,14 @@ public class MouseEventListener implements NativeMouseInputListener, NativeMouse
                 : MouseActionType.RIGHT_RELEASE.getTag();
         MouseActionType mouseActionType = MouseActionType.fromValue(value, tag);
         MouseActionDto action = initializeMouseAction(e, mouseActionType);
-        System.out.println("nativeMouseReleased: " + action);
+        System.out.println("nativeMouseReleased|" + action);
         ACTION_CENTER.add(action);
     }
 
     public void nativeMouseMoved(NativeMouseEvent e) {
         MouseActionType mouseActionType = MouseActionType.MOVED;
         MouseActionDto action = initializeMouseAction(e, mouseActionType);
-        System.out.println("nativeMouseMoved: " + action);
+        System.out.println("nativeMouseMoved|" + action);
         ACTION_CENTER.add(action);
         mLatch.countDown();
     }
@@ -110,7 +110,7 @@ public class MouseEventListener implements NativeMouseInputListener, NativeMouse
                 : MouseActionType.RIGHT_DRAGGED_CLICK.getTag();
         MouseActionType mouseActionType = MouseActionType.fromValue(value, tag);
         MouseActionDto action = initializeMouseAction(e, mouseActionType);
-        System.out.println("nativeMouseDragged: " + action);
+        System.out.println("nativeMouseDragged|" + action);
         ACTION_CENTER.add(action);
         mLatch.countDown();
     }
@@ -119,7 +119,7 @@ public class MouseEventListener implements NativeMouseInputListener, NativeMouse
     public void nativeMouseWheelMoved(NativeMouseWheelEvent e) {
         MouseActionType mouseActionType = MouseActionType.WHEEL;
         MouseActionDto action = initializeMouseAction(e, mouseActionType, e);
-        System.out.println("nativeMouseWheelMoved: " + action);
+        System.out.println("nativeMouseWheelMoved|" + action);
         ACTION_CENTER.add(action);
     }
 
@@ -129,32 +129,32 @@ public class MouseEventListener implements NativeMouseInputListener, NativeMouse
         System.out.println("All Mouse, exiting.");
     }
 
-    public static void main(String[] args) {
-        try {
-            example.disableLog();
-            GlobalScreen.registerNativeHook();
-            // Construct the example object.
-            // Add the appropriate listeners.
-            GlobalScreen.addNativeKeyListener(harness);
-            GlobalScreen.addNativeMouseListener(example);
-            GlobalScreen.addNativeMouseMotionListener(example);
-            GlobalScreen.addNativeMouseWheelListener(new MouseEventListener());
-            example.start();
-            System.out.println("Listener attached.");
-            harness.startKeyboard();
-            System.out.println("Listener detached.");
-
-
-//            example.removeMouseEvent(example);
-
-        } catch (NativeHookException ex) {
-            System.err.println("There was a problem registering the native hook.");
-            ex.printStackTrace();
-            System.exit(1);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            example.disableLog();
+//            GlobalScreen.registerNativeHook();
+//            // Construct the example object.
+//            // Add the appropriate listeners.
+//            GlobalScreen.addNativeKeyListener(harness);
+//            GlobalScreen.addNativeMouseListener(example);
+//            GlobalScreen.addNativeMouseMotionListener(example);
+//            GlobalScreen.addNativeMouseWheelListener(new MouseEventListener());
+//            example.start();
+//            System.out.println("Listener attached.");
+//            harness.startKeyboard();
+//            System.out.println("Listener detached.");
+//
+//
+////            example.removeMouseEvent(example);
+//
+//        } catch (NativeHookException ex) {
+//            System.err.println("There was a problem registering the native hook.");
+//            ex.printStackTrace();
+//            System.exit(1);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
 
 }
