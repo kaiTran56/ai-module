@@ -2,3 +2,4 @@
 logs
 main.db
 target
+*.log
